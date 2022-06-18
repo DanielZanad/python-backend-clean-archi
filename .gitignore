@@ -2,3 +2,4 @@ uml
 **/__pycache__
 venv
 storage.db
+.pytest_cache
