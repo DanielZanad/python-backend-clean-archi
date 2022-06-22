@@ -1,19 +1,14 @@
-from typing import List, Type, Dict
+from typing import Type, Dict, List
 from src.data.find_user import FindUser
-from src.domain.models import Pets
-from src.data.interfaces import PetRepostioryInterface as PetRepository
-from src.domain.models.users import Users
+from src.data.interfaces import PetRepositoryInterface as PetRepository
 from src.domain.use_cases import RegisterPet as RegisterPetInterface
+from src.domain.models import Users, Pets
 
 
 class RegisterPet(RegisterPetInterface):
     """Class to define use case: Register Pet"""
 
-    def __init__(
-        self, pet_repository: Type[PetRepository], find_user: FindUser
-    ) -> None:
-
-        """ """
+    def __init__(self, pet_repository: [PetRepository], find_user: Type[FindUser]):
         self.pet_repository = pet_repository
         self.find_user = find_user
 
@@ -24,20 +19,20 @@ class RegisterPet(RegisterPetInterface):
         :param - name: pet name
                - specie: type of the specie
                - age: age of the pet
-               - user_information: Dictionary with user_id and/or user_name
-        :return - Dictionary with informations of the process
+               - user_information: Dictionaty with user_id and/or user_name
+        :return - Dictionaty with informations of the process
         """
 
         response = None
 
-        # Validating entry and trying to find an User
+        # Validating entry and trying to find an user
         validate_entry = isinstance(name, str) and isinstance(specie, str)
         user = self.__find_user_information(user_information)
         checker = validate_entry and user["Success"]
 
         if checker:
             response = self.pet_repository.insert_pet(
-                name=name, specie=specie, age=age, user_id=user_information["user_id"]
+                name, specie, age, user_information["user_id"]
             )
 
         return {"Success": checker, "Data": response}
@@ -46,7 +41,7 @@ class RegisterPet(RegisterPetInterface):
         self, user_information: Dict[int, str]
     ) -> Dict[bool, List[Users]]:
         """Check user Infos and select user
-        :param - user_information: Dictonary with user_id and/or user_name
+        :param - user_information: Dictionary with user_id and/or user_name
         :return - Dictionary with the response of find_use use case
         """
 

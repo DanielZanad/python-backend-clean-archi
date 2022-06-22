@@ -3,17 +3,16 @@ from src.infra.config import DBConnectionHandler
 from .user_repository import UserRepository
 from src.infra.entities import Users as UsersModel
 
-
 faker = Faker()
 user_repository = UserRepository()
 db_connection_handler = DBConnectionHandler()
 
 
 def test_insert_user():
-    """Should insert user"""
+    """Should Insert User"""
+
     name = faker.name()
     password = faker.word()
-
     engine = db_connection_handler.get_engine()
 
     # SQL Commands
@@ -21,10 +20,8 @@ def test_insert_user():
     query_user = engine.execute(
         "SELECT * FROM users WHERE id='{}';".format(new_user.id)
     ).fetchone()
-    print(new_user)
-    print(query_user)
 
-    engine.execute("DELETE FROM users WHERE id='{}';".format(new_user.id))
+    engine.execute("DELETE FROM users WHERE id='{}'".format(new_user.id))
 
     assert new_user.id == query_user.id
     assert new_user.name == query_user.name
@@ -32,7 +29,8 @@ def test_insert_user():
 
 
 def test_select_user():
-    """Should select a user in Users table and compare it"""
+    """Shoul select a user in Users table and compare it"""
+
     user_id = faker.random_number(digits=5)
     name = faker.name()
     password = faker.word()
@@ -40,7 +38,7 @@ def test_select_user():
 
     engine = db_connection_handler.get_engine()
     engine.execute(
-        "INSERT INTO users (id, name, password) VALUES ('{}', '{}', '{}');".format(
+        "INSERT INTO users (id, name, password) VALUES ('{}','{}','{}');".format(
             user_id, name, password
         )
     )

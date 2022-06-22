@@ -35,7 +35,8 @@ def test_insert_pet():
 
 
 def test_select_pet():
-    """Should select a pet in Pets table and comapre it"""
+    """Should select a pet in Pets table and compare it"""
+
     pet_id = faker.random_number(digits=4)
     name = faker.name()
     specie = "fish"
@@ -45,19 +46,16 @@ def test_select_pet():
     specie_mock = AnimalTypes("fish")
     data = Pets(id=pet_id, name=name, specie=specie_mock, age=age, user_id=user_id)
 
-    # SQL Commands
+    # SQL COmmands
 
     engine = db_connection_handler.get_engine()
     engine.execute(
-        "INSERT INTO pets (id, name, specie, age, user_id) VALUES ('{}','{}', '{}', '{}', '{}');".format(
+        "INSERT INTO pets (id, name, specie, age, user_id) VALUES ('{}', '{}', '{}', '{}', '{}');".format(
             pet_id, name, specie, age, user_id
         )
     )
-
     query_pets1 = pet_repository.select_pet(pet_id=pet_id)
-
     query_pets2 = pet_repository.select_pet(user_id=user_id)
-
     query_pets3 = pet_repository.select_pet(pet_id=pet_id, user_id=user_id)
 
     assert data in query_pets1

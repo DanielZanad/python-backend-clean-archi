@@ -1,1 +1,1 @@
-from .http_modules import HttpResponse, HttpRequest
+from .http_models import HttpRequest, HttpResponse

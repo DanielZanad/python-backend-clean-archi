@@ -6,7 +6,7 @@ from src.domain.test import mock_pet
 class PetRepositorySpy:
     """Spy to Pet Repository"""
 
-    def __init__(self) -> None:
+    def __init__(self):
         self.insert_pet_param = {}
         self.select_pet_param = {}
 

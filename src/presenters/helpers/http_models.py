@@ -9,7 +9,7 @@ class HttpRequest:
         self.body = body
         self.query = query
 
-    def __repr__(self) -> str:
+    def __repr__(self):
         return (
             f"HttpRequest (header={self.header}, body={self.body}, query={self.query})"
         )
@@ -22,5 +22,5 @@ class HttpResponse:
         self.status_code = status_code
         self.body = body
 
-    def __repr__(self) -> str:
+    def __repr__(self):
         return f"HttpResponse (status_code={self.status_code}, body={self.body})"

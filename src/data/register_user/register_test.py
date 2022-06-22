@@ -2,7 +2,6 @@ from faker import Faker
 from src.infra.test import UserRepositorySpy
 from .register import RegisterUser
 
-
 faker = Faker()
 
 
@@ -18,7 +17,7 @@ def test_register():
         name=attributes["name"], password=attributes["password"]
     )
 
-    # Testing input
+    # Testing inputs
     assert user_repo.insert_user_params["name"] == attributes["name"]
     assert user_repo.insert_user_params["password"] == attributes["password"]
 
@@ -28,7 +27,7 @@ def test_register():
 
 
 def test_register_fail():
-    """Testing registry method in case to fail"""
+    """Testing registry method in fail"""
 
     user_repo = UserRepositorySpy()
     register_user = RegisterUser(user_repo)
@@ -41,7 +40,7 @@ def test_register_fail():
 
     print(response)
 
-    # Testing input
+    # Testing inputs
     assert user_repo.insert_user_params == {}
 
     # Testing outputs

@@ -7,7 +7,7 @@ faker = Faker()
 def mock_pet() -> Pets:
     """Mocking Pet
     :param - None
-    :return - Fake pet registry
+    :return - Fake Pet registry
     """
 
     return Pets(

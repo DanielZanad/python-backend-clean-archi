@@ -6,12 +6,13 @@ from src.domain.test import mock_users
 class UserRepositorySpy:
     """Spy to User Repository"""
 
-    def __init__(self) -> None:
+    def __init__(self):
         self.insert_user_params = {}
         self.select_user_params = {}
 
     def insert_user(self, name: str, password: str) -> Users:
-        """spy to all the attributes"""
+        """Spy to all the attributes"""
+
         self.insert_user_params["name"] = name
         self.insert_user_params["password"] = password
 

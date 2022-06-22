@@ -11,7 +11,7 @@ class DBConnectionHandler:
 
     def get_engine(self):
         """Return connection Engine
-        :param - None
+        :parram - None
         :return - engine connection to Database
         """
         engine = create_engine(self.__connection_string)

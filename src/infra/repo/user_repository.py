@@ -1,20 +1,20 @@
 # pylint: disable=E1101
 
 from typing import List
+from src.data.interfaces import UserRepositoryInterface
 from src.domain.models import Users
-from src.data.interfaces import UserRepostioryInterface
 from src.infra.config import DBConnectionHandler
 from src.infra.entities import Users as UsersModel
 
 
-class UserRepository(UserRepostioryInterface):
-    """Class to manager User Repository"""
+class UserRepository(UserRepositoryInterface):
+    """Class to manage User Repository"""
 
     @classmethod
     def insert_user(cls, name: str, password: str) -> Users:
-        """Insert data in user entity
+        """insert data in user entity
         :param - name: person name
-               - password: person password
+               - password: user pasword
         :return - tuple with new user inserted
         """
 
@@ -32,7 +32,8 @@ class UserRepository(UserRepostioryInterface):
                 raise
             finally:
                 db_connection.session.close()
-            return None
+
+        return None
 
     @classmethod
     def select_user(cls, user_id: int = None, name: str = None) -> List[Users]:
@@ -42,6 +43,7 @@ class UserRepository(UserRepostioryInterface):
                - name: User name
         :return - List with Users selected
         """
+
         try:
             query_data = None
 
@@ -56,6 +58,7 @@ class UserRepository(UserRepostioryInterface):
                     query_data = [data]
 
             elif not user_id and name:
+
                 with DBConnectionHandler() as db_connection:
                     data = (
                         db_connection.session.query(UsersModel)
@@ -79,7 +82,6 @@ class UserRepository(UserRepostioryInterface):
         except:
             db_connection.session.rollback()
             raise
-
         finally:
             db_connection.session.close()
 

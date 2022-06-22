@@ -7,7 +7,7 @@ faker = Faker()
 
 
 def test_registry():
-    """Testing Registry method in RegisterPet"""
+    """Testing Registru method in RegisterPet"""
 
     pet_repo = PetRepositorySpy()
     find_user = FindUserSpy(UserRepositorySpy())
@@ -45,6 +45,6 @@ def test_registry():
         == attributes["user_information"]["user_name"]
     )
 
-    # Testing outputs
+    # Testing Outputs
     assert response["Success"] is True
     assert response["Data"]

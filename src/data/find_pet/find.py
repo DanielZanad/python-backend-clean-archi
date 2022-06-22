@@ -1,20 +1,18 @@
-from typing import Type
-from typing import Dict
-from typing import List
-from src.domain.models import Pets
+from typing import Dict, List, Type
+from src.data.interfaces import PetRepositoryInterface as PetRepository
 from src.domain.use_cases import FindPet as FindPetInterface
-from src.data.interfaces import PetRepostioryInterface as PetRepository
+from src.domain.models import Pets
 
 
 class FindPet(FindPetInterface):
-    """Class to define use case FindUser"""
+    """Class to define usecase: Find Pet"""
 
-    def __init__(self, pet_repository: Type[PetRepository]) -> None:
+    def __init__(self, pet_repository: Type[PetRepository]):
         self.pet_repository = pet_repository
 
     def by_pet_id(self, pet_id: int) -> Dict[bool, List[Pets]]:
         """Select Pet By pet_id
-        :param - pet_id: id of the user
+        :param - pet_id: id of the pet
         :return - Dictionary with informations of the process
         """
 
@@ -26,8 +24,8 @@ class FindPet(FindPetInterface):
 
         return {"Success": validate_entry, "Data": response}
 
-    def by_user_id(self, user_id: str) -> Dict[bool, List[Pets]]:
-        """Select Pet by user_id
+    def by_user_id(self, user_id: int) -> Dict[bool, List[Pets]]:
+        """Select Pet By user_id
         :param - user_id: id of the user owne of the pet
         :return - Dictionary with informations of the process
         """
@@ -43,9 +41,8 @@ class FindPet(FindPetInterface):
     def by_pet_id_and_user_id(
         self, pet_id: int, user_id: int
     ) -> Dict[bool, List[Pets]]:
-        """Select Pet by pet_id and user_id
-        :param - pet_id: id of the user
-        :param - user_id: id of the user
+        """Select Pet By user_id
+        :param - user_id: id of the user owne of the pet
         :return - Dictionary with informations of the process
         """
 

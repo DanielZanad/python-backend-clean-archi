@@ -1,13 +1,13 @@
 # pylint: disable=E1101
 
 from typing import List
-from src.data.interfaces import PetRepostioryInterface
+from src.data.interfaces import PetRepositoryInterface
 from src.domain.models import Pets
 from src.infra.config import DBConnectionHandler
 from src.infra.entities import Pets as PetsModel
 
 
-class PetRepository(PetRepostioryInterface):
+class PetRepository(PetRepositoryInterface):
     """Class to manage Pet Repository"""
 
     @classmethod
@@ -48,11 +48,12 @@ class PetRepository(PetRepostioryInterface):
         """
         Select data in PetsEntity entity by id and/or user_id
         :param - pet_id: Id of the pet registry
-               - user_id: Id of the owner
+               - user_ud: Id of the owner
         :return - List with Pets selected
         """
 
         try:
+
             query_data = None
 
             if pet_id and not user_id:
@@ -86,9 +87,11 @@ class PetRepository(PetRepostioryInterface):
                     query_data = [data]
 
             return query_data
+
         except:
             db_connection.session.rollback()
             raise
         finally:
             db_connection.session.close()
+
         return None
